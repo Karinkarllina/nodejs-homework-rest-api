@@ -2,7 +2,9 @@ import express from "express";
 import logger from "morgan";
 import cors from "cors";
 
-const contactsRouter = require('./routes/api/contacts-router.js')
+
+import contactsRouter from "./routes/api/contacts-router.js";
+
 
 const app = express()
 
