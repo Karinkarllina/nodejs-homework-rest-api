@@ -1,23 +1,24 @@
 import express from "express";
 
-import contactsService from "../../models/contacts.js";
-import { HttpError } from '../../helpers/index.js';
+import contactsService from "../../models/contacts-controller.js";
+// import { HttpError } from '../../helpers/index.js';
 import { isEmptyBody, isValidId } from '../../middlewars/index.js';
 import contactsSchemas from '../../shema/contacts-schemas.js';
+import { validateBody } from '../../decorators/index.js'
 
 
 
-const validateBody = schema => {
-    const func = (req, res, next) => {
-        const { error } = schema.validate(req.body);
-        if (error) {
-            next(HttpError(400, error.message));
-        }
-        next();
-    }
+// const validateBody = schema => {
+//     const func = (req, res, next) => {
+//         const { error } = schema.validate(req.body);
+//         if (error) {
+//             next(HttpError(400, error.message));
+//         }
+//         next();
+//     }
 
-    return func;
-}
+//     return func;
+// }
 
 const contactsRouter = express.Router();
 

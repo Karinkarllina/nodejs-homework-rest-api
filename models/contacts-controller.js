@@ -1,8 +1,6 @@
-import fs from "fs/promises";
-import path from "path";
-import { nanoid } from "nanoid";
 import Contact from './contact.js';
 import { HttpError } from '../helpers/index.js';
+import { ctrlWrapper } from "../decorators/index.js";
 
 
 
@@ -57,10 +55,10 @@ const updateStatusContact = async (req, res) => {
 }
 
 export default {
-  listContacts,
-  getContactById,
-  addContact,
-  removeContact,
-  updateContact,
-  updateStatusContact,
+  listContacts: ctrlWrapper(listContacts),
+  getContactById: ctrlWrapper(getContactById),
+  addContact: ctrlWrapper(addContact),
+  removeContact: ctrlWrapper(removeContact),
+  updateContact: ctrlWrapper(updateContact),
+  updateStatusContact: ctrlWrapper(updateStatusContact),
 }
