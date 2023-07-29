@@ -3,9 +3,7 @@ import mongoose from 'mongoose';
 
 import app from "./app.js";
 
-import dotenv from 'dotenv'
-
-dotenv.config();
+import "dotenv/config";
 
 
 // dg2giSFyQ99kcr53

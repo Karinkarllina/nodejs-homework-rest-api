@@ -6,6 +6,14 @@ import { HttpError } from "../helpers/index.js";
 
 import bcrypt from "bcrypt";
 
+import "dotenv/config";
+
+import jwt from "jsonwebtoken";
+
+
+const { JWT_SECRET } = process.env;
+
+
 
 const register = async (req, res) => {
     const {email, password} = req.body;
@@ -38,19 +46,42 @@ const login = async (req, res) => {
         throw HttpError(401, "Email or password invalid");
     }
 
-    const token = '222.363.gv6664.4567'
+     const payload = {
+        id: user._id,
+    }
+
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "23h" });
+
+    await User.findByIdAndUpdate(user._id, {token});
     
-        res.json({
+            res.json({
         token,
     })
-
-    // const payload = {
-    //     id: user._id,
-    // }
 }
 
+const getCurrent = async (req, res) => {
+    const {name, email} = req.user;
+
+    res.json({
+        name,
+        email,
+    })
+}
+
+
+const signout = async (req, res) => { 
+
+    const {_id} = req.user;
+    await User.findByIdAndUpdate(_id, {token: ""});
+
+    res.json({
+        message: "Signout ssucess"
+    })
+}
 
 export default {
     register: ctrlWrapper(register),
     login: ctrlWrapper(login),
+    getCurrent: ctrlWrapper(getCurrent),
+    signout: ctrlWrapper(signout),
 }
