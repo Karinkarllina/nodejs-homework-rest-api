@@ -14,7 +14,18 @@ const loginSchema = Joi.object({
   }),
 });
 
+
+const subscriptionSchema = Joi.object({
+  subscription: Joi.string()
+    .valid("starter", "pro", "business")
+    .required()
+    .messages({
+      'any.required': "Missing field 'subscription'",
+    }),
+});
+
 export default {
     registerSchema,
     loginSchema,
+    subscriptionSchema,
 }

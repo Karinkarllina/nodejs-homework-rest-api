@@ -6,9 +6,6 @@ import { validateBody } from '../../decorators/index.js'
 
 
 
-
-
-
 const contactsRouter = express.Router();
 
 contactsRouter.use(authenticate); 
