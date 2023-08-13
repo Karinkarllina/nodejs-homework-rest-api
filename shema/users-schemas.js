@@ -24,8 +24,13 @@ const subscriptionSchema = Joi.object({
     }),
 });
 
+const userEmailSchema = Joi.object({
+    email: Joi.string().pattern(/.+\@.+\..+/).required(),
+})
+
 export default {
     registerSchema,
     loginSchema,
     subscriptionSchema,
+    userEmailSchema
 }
